@@ -1,6 +1,8 @@
 import os
 import shop # импортируем файл shop.py
 #меню
+
+
 def show_menu():
     """
     показывает главное меню
@@ -9,14 +11,13 @@ def show_menu():
     TODO: 
         Настройки: цвет текста
         Сохранение/загрузка
-
     """
     #Главный цикл меню, завершается правильным выбором
     while True:
         os.system("cls")#очистка
         print("1 - начать новую игру")
         print("2 = выйти")
-        answer = input("Введите номер ответа и нажмите ENTER")
+        answer = input("Введите номер ответа и нажмите ENTER ")
         if answer == "1":
             start_game()
             break
@@ -24,6 +25,7 @@ def show_menu():
             print("выходим из игры")
             break
     print("Выходим из меню! Пока")      
+
 
 #запуск программы
 def start_game():
@@ -35,14 +37,13 @@ def start_game():
         player_xp - опыт игрока
     запускает игру
     игра контролируется переменной is_game
-
     """
     #инфа перса
     
-    player_money = 50
+    player_money = 10
     player_hp = 100
-    player_xp = 0
     player_name = input("введите имя")
+    player_potions = 1
 
 
 
@@ -57,12 +58,15 @@ def start_game():
         #показывает инфу перса
         print("игра запущена")
         input("нажмите ENTER чтобы продолжить")
+        print("персонаж")
         print(f"name {player_name}")
         print(f"money {player_money}")
         print(f"hp {player_hp}")
-        print(f"xp {player_xp}")
+        print(f"СКОЛЬКО ЗЕЛЕК {player_potions}")
+        
+
         #камень и пути
-        print(f"подъезжает {player_name} к трем дорожкам, на перекрестке камень лежит, а на том камне написано: «Кто вправо поедет - тому убитым быть, кто влево поедет - тому играть в кости, а кто прямо поедет - пойдёт к лавке».")
+        print(f"подъезжает {player_name} к трем дорожкам, на перекрестке камень лежит, а на том камне написано: «Кто вправо поедет - тому убитым быть(1), кто влево поедет - тому играть в кости(2), а кто прямо поедет - пойдёт к лавке(3), а если назад пойдёшь, конец обретёшь(0 если устал играть)».")
         answer = input("введите номер карты и нажмите ENTER")
 
         if answer == "1":
@@ -70,7 +74,7 @@ def start_game():
         elif answer == "2":
             print("Поехал играть в кости")
         elif answer == "3":
-            shop.shop(player_name, player_money, player_hp, player_xp)
+            shop.shop(player_name, player_money, player_hp, player_potions)
 
         input("ENTER - дальше")
 show_menu()
