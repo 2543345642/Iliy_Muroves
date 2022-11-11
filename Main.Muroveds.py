@@ -1,6 +1,6 @@
 import os
 import shop # импортируем файл shop.py
-#меню
+import bitva # импортируем файл bitva.py
 
 
 def show_menu():
@@ -39,9 +39,9 @@ def start_game():
     игра контролируется переменной is_game
     """
     #инфа перса
+    player_name = input("введите имя")
     player_money = 10
     player_hp = 100
-    player_name = input("введите имя")
     player_potions = 1
     player = (player_name, player_money, player_hp, player_potions)
 
@@ -65,7 +65,7 @@ def start_game():
         answer = input("введите номер карты и нажмите ENTER")
 
         if answer == "1":
-            print("поехал драться")
+            player = bitva.bitva(player)
         elif answer == "2":
             print("Поехал играть в кости")
         elif answer == "3":
