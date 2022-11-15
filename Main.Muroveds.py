@@ -1,7 +1,7 @@
 import os
 import shop # импортируем файл shop.py
 import bitva # импортируем файл bitva.py
-
+import Roll
 
 def show_menu():
     """
@@ -41,9 +41,10 @@ def start_game():
     #инфа перса
     player_name = input("введите имя")
     player_money = 10
-    player_hp = 100
+    player_hp = 200
     player_potions = 1
     player = (player_name, player_money, player_hp, player_potions)
+
 
 
 
@@ -67,7 +68,7 @@ def start_game():
         if answer == "1":
             player = bitva.bitva(player)
         elif answer == "2":
-            print("Поехал играть в кости")
+            player == Roll.Roll(player)
         elif answer == "3":
             player = shop.shop(player)
 
