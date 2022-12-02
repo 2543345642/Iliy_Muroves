@@ -175,13 +175,14 @@ def start_fight(hero: list) -> None:
     """
     pass
 
-    enemy = make_hero()
+    enemy = make_hero(hp_now = 30, xp_now = 123, inventory =["Вражейский меч", "вражеский конь"])
     while hero[2] > 0 and enemy[2] > 0:
         combat_turn(hero,enemy)
         combat_turn(enemy,hero)
         show_hero(hero)
         show_hero(enemy)
         input("Нажмите Enter")
+    combat_result(hero, enemy)
     print("Бой закончен")
 
 def combat_result(hero,enemy) -> None:
@@ -199,6 +200,8 @@ def combat_result(hero,enemy) -> None:
         hero[10] += enemy[10]
         print(enemy[10], "монет")
         print("и забирает предметы:")
+        for item in enemy[12]:
+            print("item")
         print(*enemy[12])
         hero[12] += enemy[12]
         levelup(hero)
@@ -219,3 +222,48 @@ def combat_turn(attacker: list, defender: list)-> None:
         defender[2] -= damage
         print(f'{attacker[0]} ударил {defender[0]} на {damage} здоровья')
         pass
+
+def choose_option(hero: list, text: str, options: list, ) -> int:
+    """
+    покажет описание ситуации
+    показывает варианты
+    Получает ввод пользователя
+    проверяет ввод и возращает его, если он есть в вариантах
+
+
+    """
+    os.system("cls")
+    print(text)
+    for num, option in enumerate(options):
+        print(f"{num}, {option}")
+    option = input("\nВведите номер варианта и нажмите Enter: ")
+    try:
+        option = int(option)
+    except: #выполнится, если try не получится
+        print("ввод должен быть целым не отрицательным числом")
+    else: # выполнится если try удался
+        if option < len(options) and option > -1:
+            return option
+        else:
+            print("Нет такого выбора")
+
+
+
+
+def visit_hub(hero):
+    text = f"{hero[2]} приехал к камню"
+    options = [
+        "сыграть в кости за 10 монет (0)",
+        " биться с разбойником(1)",
+        " купить зелье за 10 монет(2)",
+        " выпить зелье(3)",
+        ]
+    option = choose_option(hero, text, options)
+    if option == 0:
+        play_dice(hero, 10)
+    elif option == 1:
+        start_fight(hero)
+    elif option == 2:
+        buy_item(hero, "зелье", 10)
+    elif option == 3:
+        consume_item(hero, 0)
